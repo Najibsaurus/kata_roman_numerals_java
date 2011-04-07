@@ -8,7 +8,7 @@ import org.junit.Test;
 import de.marhan.kata.roman.RomanNumberConverter;
 
 /**
- * Test class for converter.
+ * Test class for {@link RomanNumberConverter.java}.
  * 
  * @author Markus Hanses
  *

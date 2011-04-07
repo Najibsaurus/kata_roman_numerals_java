@@ -8,14 +8,19 @@ package de.marhan.kata.roman;
  */
 public class TestData {
 
-	public static String getRomanForNumber(int number) {
-		if (number <= 0) {
+	/**
+	 * Returns the Roman number for the given Arabic.
+	 * @param arabicNumber The given number.
+	 * @return The Roman number for the given Arabic number. 
+	 */
+	public static String getRomanForNumber(int arabicNumber) {
+		if (arabicNumber <= 0) {
 			throw new IllegalArgumentException("Number must not less than 1");
 		}
-		return romans[--number];
+		return romanNumberMap[--arabicNumber];
 	}
 
-	public static String[] romans = { "I", "II", "III", "IV", "V", "VI", "VII",
+	private static String[] romanNumberMap = { "I", "II", "III", "IV", "V", "VI", "VII",
 			"VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII",
 			"XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV",
 			"XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII",
