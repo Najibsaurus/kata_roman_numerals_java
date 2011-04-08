@@ -1,3 +1,7 @@
+# Coding Dojo Roman Numerals
+
+http://www.codingdojo.org/cgi-bin/wiki.pl?KataRomanNumerals
+
 ## Executes the tests with maven
 
 mvn clean test
