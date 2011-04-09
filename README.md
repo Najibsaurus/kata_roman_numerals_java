@@ -1,6 +1,6 @@
 # Coding Dojo Roman Numerals
 
-http://www.codingdojo.org/cgi-bin/wiki.pl?KataRomanNumerals
+Based upon [CodingDojo](http://www.codingdojo.org/cgi-bin/wiki.pl?KataRomanNumerals)
 
 ## Executes the tests with maven
 
