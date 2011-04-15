@@ -41,7 +41,6 @@ public class RomanNumberConverter {
     }
 
     boolean isMappingForArabicNumber(Integer arabicNumber, NumberMappingElement mapping) {
-	System.out.println(mapping);
 	boolean found = mapping.getArabic() <= arabicNumber;
 	return found || mapping.getLowerBorder() <= arabicNumber;
     }

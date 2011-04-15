@@ -20,11 +20,12 @@ public class RomanNumberMappingFinderTest {
 
     private RomanNumberConverter converter;
 
-    private final Map<Integer, String> arabicToMapping = new HashMap<Integer, String>();
+    private Map<Integer, String> arabicToMapping;
 
     @Before
     public void setUp() {
 	converter = new RomanNumberConverter();
+	arabicToMapping = new HashMap<Integer, String>();
 
 	arabicToMapping.put(1, "I");
 	arabicToMapping.put(2, "I");
@@ -35,7 +36,10 @@ public class RomanNumberMappingFinderTest {
 	arabicToMapping.put(50, "L");
 	arabicToMapping.put(100, "C");
 	arabicToMapping.put(500, "D");
+	arabicToMapping.put(899, "D");
+	arabicToMapping.put(900, "M");
 	arabicToMapping.put(1000, "M");
+	arabicToMapping.put(10000, "M");
     }
 
     @Test
@@ -43,7 +47,6 @@ public class RomanNumberMappingFinderTest {
 	for (Integer arabic : arabicToMapping.keySet()) {
 	    NumberMappingElement mapping = converter.findMappingForArabic(arabic);
 	    assertThat(mapping.getRoman(), is(arabicToMapping.get(arabic)));
-
 	}
     }
 
@@ -54,9 +57,15 @@ public class RomanNumberMappingFinderTest {
     }
 
     @Test
-    public void isMappingForArabicNumber_1000AndM_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(1000, NumberMapping.mapping_M);
+    public void isMappingForArabicNumber_899AndD_true() throws Exception {
+	boolean result = converter.isMappingForArabicNumber(899, NumberMapping.mapping_D);
 	assertThat(result, is(true));
+    }
+
+    @Test
+    public void isMappingForArabicNumber_899AndM_false() throws Exception {
+	boolean result = converter.isMappingForArabicNumber(899, NumberMapping.mapping_M);
+	assertThat(result, is(false));
     }
 
     @Test
@@ -64,4 +73,11 @@ public class RomanNumberMappingFinderTest {
 	boolean result = converter.isMappingForArabicNumber(900, NumberMapping.mapping_M);
 	assertThat(result, is(true));
     }
+
+    @Test
+    public void isMappingForArabicNumber_1000AndM_true() throws Exception {
+	boolean result = converter.isMappingForArabicNumber(1000, NumberMapping.mapping_M);
+	assertThat(result, is(true));
+    }
+
 }
