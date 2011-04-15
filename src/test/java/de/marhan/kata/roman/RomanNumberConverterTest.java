@@ -13,13 +13,13 @@ import static org.junit.Assert.assertThat;
  */
 public class RomanNumberConverterTest {
 
-	RomanNumberConverter converter = new RomanNumberConverter();
+    RomanNumberConverter converter = new RomanNumberConverter();
 
-	@Test
-	public void convert_till3_success() throws Exception {
-		for (int i = 1; i <= 1000; i++) {
-			assertThat(converter.convert(i), is(TestData.getRomanForNumber(i)));
-		}
+    @Test
+    public void convert_till3_success() throws Exception {
+	for (int i = 1; i <= 1000; i++) {
+	    assertThat(converter.convert(i), is(TestData.getRomanForNumber(i)));
 	}
+    }
 
 }
