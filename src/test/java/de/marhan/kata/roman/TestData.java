@@ -1,7 +1,7 @@
 package de.marhan.kata.roman;
 
 /**
- * The Romans numbers for acceptance tests.
+ * The Romans numerals for acceptance tests.
  * 
  * @author Markus Hanses
  * 
@@ -22,6 +22,9 @@ public class TestData {
 	return romanNumberMap[--arabicNumber];
     }
 
+    /**
+     * @return The length of test data.
+     */
     public static int getLengthOfData() {
 	return romanNumberMap.length;
     }

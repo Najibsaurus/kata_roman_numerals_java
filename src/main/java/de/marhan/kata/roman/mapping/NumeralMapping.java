@@ -1,4 +1,4 @@
-package de.marhan.kata.roman;
+package de.marhan.kata.roman.mapping;
 
 import java.util.ArrayList;
 import java.util.List;

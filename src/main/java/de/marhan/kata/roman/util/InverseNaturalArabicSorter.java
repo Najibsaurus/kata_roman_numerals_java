@@ -2,9 +2,10 @@ package de.marhan.kata.roman.util;
 
 import java.util.Comparator;
 
-import de.marhan.kata.roman.NumeralMappingElement;
+import de.marhan.kata.roman.mapping.NumeralMappingElement;
 
 /**
+ * Sorts the mapping elements by arabic numeral in inverse natural order.
  * 
  * @author Markus Hanses
  * 

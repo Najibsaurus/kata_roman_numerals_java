@@ -3,21 +3,23 @@ package de.marhan.kata.roman;
 import java.util.Collections;
 import java.util.List;
 
+import de.marhan.kata.roman.mapping.NumeralMapping;
+import de.marhan.kata.roman.mapping.NumeralMappingElement;
 import de.marhan.kata.roman.util.InverseNaturalArabicSorter;
 
 /**
- * The converter for Arabic numbers to Roman numbers.
+ * The converter for arabic numerals to roman numerals.
  * 
  * @author Markus Hanses
  * 
  */
 public class RomanNumeralConverter {
 
-    private final List<NumeralMappingElement> numberMappings;
+    private final List<NumeralMappingElement> numeralMappings;
 
     public RomanNumeralConverter() {
-	numberMappings = NumeralMapping.createNumeralMappingList();
-	Collections.sort(numberMappings, new InverseNaturalArabicSorter());
+	numeralMappings = NumeralMapping.createNumeralMappingList();
+	Collections.sort(numeralMappings, new InverseNaturalArabicSorter());
     }
 
     /**
@@ -28,31 +30,43 @@ public class RomanNumeralConverter {
      * @return The roman number for given arabic.
      */
     public String convert(Integer arabicNumeral) {
-	StringBuilder builder = new StringBuilder();
 	NumeralMappingElement mapping = findMappingForArabic(arabicNumeral);
-	Integer prefixValue = getPrefixValue(arabicNumeral, mapping);
-	builder.append(createRomanNumeralPrefixByMapping(prefixValue, mapping));
-	builder.append(convertTheDifference(arabicNumeral, prefixValue));
+	Integer arabicPrefix = findArabicPrefix(arabicNumeral, mapping);
+	String romanPrefix = createRomanPrefix(arabicPrefix, mapping);
+
+	StringBuilder builder = new StringBuilder();
+	builder.append(romanPrefix);
+	builder.append(convertTheSuffix(arabicNumeral, arabicPrefix));
 	return builder.toString();
     }
 
-    private String convertTheDifference(Integer arabicNumeral, Integer prefixValue) {
-	Integer differenceValue = calculateDifference(arabicNumeral, prefixValue);
-	if (isThereADifference(differenceValue)) {
-	    return convert(differenceValue);
+    /**
+     * Calculate the difference of prefix and the arabic numeral to converts it
+     * by recursion.
+     * 
+     * @param arabicNumeral
+     *            The original arabic numeral to convert.
+     * @param prefixValue
+     *            The first roman numeral, which was found.
+     * @return
+     */
+    String convertTheSuffix(Integer arabicNumeral, Integer prefixValue) {
+	Integer arabicSuffix = calculateDifference(arabicNumeral, prefixValue);
+	if (isThereANumeralToConvert(arabicSuffix)) {
+	    return convert(arabicSuffix);
 	}
 	return "";
     }
 
-    private boolean isThereADifference(Integer differenceValue) {
-	return differenceValue > 0;
+    boolean isThereANumeralToConvert(Integer arabicNumeral) {
+	return arabicNumeral > 0;
     }
 
-    private Integer calculateDifference(Integer arabicNumber, Integer prefixValue) {
+    Integer calculateDifference(Integer arabicNumber, Integer prefixValue) {
 	return arabicNumber - prefixValue;
     }
 
-    Integer getPrefixValue(Integer arabicNumber, NumeralMappingElement mapping) {
+    Integer findArabicPrefix(Integer arabicNumber, NumeralMappingElement mapping) {
 	if (arabicNumber >= mapping.getArabic()) {
 	    return mapping.getArabic();
 	}
@@ -65,7 +79,7 @@ public class RomanNumeralConverter {
 	throw new IllegalArgumentException(errorMessage);
     }
 
-    String createRomanNumeralPrefixByMapping(Integer prefixValue, NumeralMappingElement mapping) {
+    String createRomanPrefix(Integer prefixValue, NumeralMappingElement mapping) {
 	if (mapping.getArabic() > prefixValue) {
 	    StringBuilder builder = new StringBuilder();
 	    builder.append(mapping.getBefore().getRoman());
@@ -81,17 +95,20 @@ public class RomanNumeralConverter {
 	throw new IllegalArgumentException(errorMessage);
     }
 
-    NumeralMappingElement findMappingForArabic(Integer arabicNumber) {
-	for (NumeralMappingElement mapping : numberMappings) {
-	    if (isMappingForArabicNumber(arabicNumber, mapping)) {
+    NumeralMappingElement findMappingForArabic(Integer arabicNumeral) {
+	for (NumeralMappingElement mapping : numeralMappings) {
+	    if (isMappingForArabic(arabicNumeral, mapping)) {
 		return mapping;
 	    }
 	}
-	throw new IllegalStateException();
+
+	String errorMessage = String.format("'%s' is not defined in range of mappings",
+		arabicNumeral);
+	throw new IllegalStateException(errorMessage);
     }
 
-    boolean isMappingForArabicNumber(Integer arabicNumber, NumeralMappingElement mapping) {
-	boolean found = mapping.getArabic() <= arabicNumber;
-	return found || mapping.getLowerBorder() <= arabicNumber;
+    boolean isMappingForArabic(Integer arabicNumeral, NumeralMappingElement mapping) {
+	boolean found = mapping.getArabic() <= arabicNumeral;
+	return found || mapping.getLowerBorder() <= arabicNumeral;
     }
 }

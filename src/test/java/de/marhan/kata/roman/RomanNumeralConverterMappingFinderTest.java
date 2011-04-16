@@ -12,11 +12,14 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.marhan.kata.roman.mapping.NumeralMapping;
+import de.marhan.kata.roman.mapping.NumeralMappingElement;
+
 /**
  * @author Markus Hanses
  * 
  */
-public class RomanNumberMappingFinderTest {
+public class RomanNumeralConverterMappingFinderTest {
 
     private RomanNumeralConverter converter;
 
@@ -52,31 +55,31 @@ public class RomanNumberMappingFinderTest {
 
     @Test
     public void isMappingForArabicNumber_1AndI_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(1, NumeralMapping.mapping_I);
+	boolean result = converter.isMappingForArabic(1, NumeralMapping.mapping_I);
 	assertThat(result, is(true));
     }
 
     @Test
     public void isMappingForArabicNumber_899AndD_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(899, NumeralMapping.mapping_D);
+	boolean result = converter.isMappingForArabic(899, NumeralMapping.mapping_D);
 	assertThat(result, is(true));
     }
 
     @Test
     public void isMappingForArabicNumber_899AndM_false() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(899, NumeralMapping.mapping_M);
+	boolean result = converter.isMappingForArabic(899, NumeralMapping.mapping_M);
 	assertThat(result, is(false));
     }
 
     @Test
     public void isMappingForArabicNumber_900AndM_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(900, NumeralMapping.mapping_M);
+	boolean result = converter.isMappingForArabic(900, NumeralMapping.mapping_M);
 	assertThat(result, is(true));
     }
 
     @Test
     public void isMappingForArabicNumber_1000AndM_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(1000, NumeralMapping.mapping_M);
+	boolean result = converter.isMappingForArabic(1000, NumeralMapping.mapping_M);
 	assertThat(result, is(true));
     }
 

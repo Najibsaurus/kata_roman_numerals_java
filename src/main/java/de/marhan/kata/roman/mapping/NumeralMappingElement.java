@@ -1,8 +1,9 @@
-package de.marhan.kata.roman;
+package de.marhan.kata.roman.mapping;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
+ * A Mapping element for arabic to roman numerals.
  * 
  * @author Markus Hanses
  * 
@@ -11,40 +12,44 @@ public class NumeralMappingElement {
 
     private NumeralMappingElement before;
 
-    private NumeralMappingElement after;
-
     private String roman;
 
     private Integer arabic;
 
     private Integer lowerBorder;
 
-    static NumeralMappingElement newInstance(NumeralMappingElement before, Integer number,
+    /**
+     * Creates a new mapping element.
+     * 
+     * @param before
+     *            The mapping of the lower numeral.
+     * @param arabic
+     *            The arabic numeral.
+     * @param roman
+     *            The roman numeral.
+     * @return The created element.
+     */
+    static NumeralMappingElement newInstance(NumeralMappingElement before, Integer arabic,
 	    String roman) {
 	NumeralMappingElement mapping = new NumeralMappingElement();
 	mapping.before = before;
 	mapping.roman = roman;
-	mapping.arabic = number;
+	mapping.arabic = arabic;
 	mapping.computeLowerBorder();
 	return mapping;
     }
 
-    static NumeralMappingElement newInstance(NumeralMappingElement before, Integer number,
-	    String roman, NumeralMappingElement after) {
-	NumeralMappingElement mapping = new NumeralMappingElement();
-	mapping.before = before;
-	mapping.roman = roman;
-	mapping.arabic = number;
-	mapping.after = after;
-	mapping.computeLowerBorder();
-	return mapping;
-    }
-
-    static NumeralMappingElement newInstance(Integer number, String roman) {
-	NumeralMappingElement mapping = new NumeralMappingElement();
-	mapping.roman = roman;
-	mapping.arabic = number;
-	return mapping;
+    /**
+     * Creates a new mapping element.
+     * 
+     * @param arabic
+     *            The arabic numeral.
+     * @param roman
+     *            The roman numeral.
+     * @return The created element.
+     */
+    static NumeralMappingElement newInstance(Integer arabic, String roman) {
+	return NumeralMappingElement.newInstance(null, arabic, roman);
     }
 
     private void computeLowerBorder() {
@@ -67,10 +72,6 @@ public class NumeralMappingElement {
 
     public boolean hasBefore() {
 	return before != null;
-    }
-
-    public NumeralMappingElement getAfter() {
-	return after;
     }
 
     public Integer getLowerBorder() {
