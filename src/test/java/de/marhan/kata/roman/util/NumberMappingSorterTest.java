@@ -11,8 +11,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.marhan.kata.roman.NumberMapping;
-import de.marhan.kata.roman.NumberMappingElement;
+import de.marhan.kata.roman.NumeralMapping;
+import de.marhan.kata.roman.NumeralMappingElement;
 
 /**
  * 
@@ -21,11 +21,11 @@ import de.marhan.kata.roman.NumberMappingElement;
  */
 public class NumberMappingSorterTest {
 
-    List<NumberMappingElement> mappings;
+    List<NumeralMappingElement> mappings;
 
     @Before
     public void setUp() {
-	mappings = NumberMapping.createNumberMappingList();
+	mappings = NumeralMapping.createNumeralMappingList();
     }
 
     @Test
@@ -40,17 +40,17 @@ public class NumberMappingSorterTest {
 	assertArabicSortingIsInverseNatural(mappings);
     }
 
-    private void assertArabicSortingIsNatural(List<NumberMappingElement> mappings) {
+    private void assertArabicSortingIsNatural(List<NumeralMappingElement> mappings) {
 	Integer before = 0;
-	for (NumberMappingElement mapping : mappings) {
+	for (NumeralMappingElement mapping : mappings) {
 	    assertThat(mapping.getArabic(), is(greaterThan(before)));
 	    before = mapping.getArabic();
 	}
     }
 
-    private void assertArabicSortingIsInverseNatural(List<NumberMappingElement> mappings) {
+    private void assertArabicSortingIsInverseNatural(List<NumeralMappingElement> mappings) {
 	Integer before = 1001;
-	for (NumberMappingElement mapping : mappings) {
+	for (NumeralMappingElement mapping : mappings) {
 	    assertThat(mapping.getArabic(), is(lessThan(before)));
 	    before = mapping.getArabic();
 	}

@@ -11,44 +11,48 @@ import de.marhan.kata.roman.util.InverseNaturalArabicSorter;
  * @author Markus Hanses
  * 
  */
-public class RomanNumberConverter {
+public class RomanNumeralConverter {
 
-    private final List<NumberMappingElement> numberMappings;
+    private final List<NumeralMappingElement> numberMappings;
 
-    public RomanNumberConverter() {
-	numberMappings = NumberMapping.createNumberMappingList();
+    public RomanNumeralConverter() {
+	numberMappings = NumeralMapping.createNumeralMappingList();
 	Collections.sort(numberMappings, new InverseNaturalArabicSorter());
     }
 
     /**
      * Converts the arabic numerals to romans.
      * 
-     * @param arabicNumber
+     * @param arabicNumeral
      *            The given arabicNumeral.
      * @return The roman number for given arabic.
      */
-    public String convert(Integer arabicNumber) {
-
+    public String convert(Integer arabicNumeral) {
 	StringBuilder builder = new StringBuilder();
-
-	NumberMappingElement mapping = findMappingForArabic(arabicNumber);
-	Integer prefixValue = getPrefixValue(arabicNumber, mapping);
-	String prefix = createRomanNumeralPrefixByMapping(prefixValue, mapping);
-	builder.append(prefix);
-
-	Integer differenceValue = calculateDifference(arabicNumber, prefixValue);
-	if (differenceValue > 0) {
-	    builder.append(convert(differenceValue));
-	}
-
+	NumeralMappingElement mapping = findMappingForArabic(arabicNumeral);
+	Integer prefixValue = getPrefixValue(arabicNumeral, mapping);
+	builder.append(createRomanNumeralPrefixByMapping(prefixValue, mapping));
+	builder.append(convertTheDifference(arabicNumeral, prefixValue));
 	return builder.toString();
+    }
+
+    private String convertTheDifference(Integer arabicNumeral, Integer prefixValue) {
+	Integer differenceValue = calculateDifference(arabicNumeral, prefixValue);
+	if (isThereADifference(differenceValue)) {
+	    return convert(differenceValue);
+	}
+	return "";
+    }
+
+    private boolean isThereADifference(Integer differenceValue) {
+	return differenceValue > 0;
     }
 
     private Integer calculateDifference(Integer arabicNumber, Integer prefixValue) {
 	return arabicNumber - prefixValue;
     }
 
-    Integer getPrefixValue(Integer arabicNumber, NumberMappingElement mapping) {
+    Integer getPrefixValue(Integer arabicNumber, NumeralMappingElement mapping) {
 	if (arabicNumber >= mapping.getArabic()) {
 	    return mapping.getArabic();
 	}
@@ -61,7 +65,7 @@ public class RomanNumberConverter {
 	throw new IllegalArgumentException(errorMessage);
     }
 
-    String createRomanNumeralPrefixByMapping(Integer prefixValue, NumberMappingElement mapping) {
+    String createRomanNumeralPrefixByMapping(Integer prefixValue, NumeralMappingElement mapping) {
 	if (mapping.getArabic() > prefixValue) {
 	    StringBuilder builder = new StringBuilder();
 	    builder.append(mapping.getBefore().getRoman());
@@ -77,8 +81,8 @@ public class RomanNumberConverter {
 	throw new IllegalArgumentException(errorMessage);
     }
 
-    NumberMappingElement findMappingForArabic(Integer arabicNumber) {
-	for (NumberMappingElement mapping : numberMappings) {
+    NumeralMappingElement findMappingForArabic(Integer arabicNumber) {
+	for (NumeralMappingElement mapping : numberMappings) {
 	    if (isMappingForArabicNumber(arabicNumber, mapping)) {
 		return mapping;
 	    }
@@ -86,7 +90,7 @@ public class RomanNumberConverter {
 	throw new IllegalStateException();
     }
 
-    boolean isMappingForArabicNumber(Integer arabicNumber, NumberMappingElement mapping) {
+    boolean isMappingForArabicNumber(Integer arabicNumber, NumeralMappingElement mapping) {
 	boolean found = mapping.getArabic() <= arabicNumber;
 	return found || mapping.getLowerBorder() <= arabicNumber;
     }

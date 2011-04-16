@@ -18,13 +18,13 @@ import org.junit.Test;
  */
 public class RomanNumberMappingFinderTest {
 
-    private RomanNumberConverter converter;
+    private RomanNumeralConverter converter;
 
     private Map<Integer, String> arabicToMapping;
 
     @Before
     public void setUp() {
-	converter = new RomanNumberConverter();
+	converter = new RomanNumeralConverter();
 	arabicToMapping = new HashMap<Integer, String>();
 
 	arabicToMapping.put(1, "I");
@@ -45,38 +45,38 @@ public class RomanNumberMappingFinderTest {
     @Test
     public void findMappingForArabic_numberGiven_mappingFound() throws Exception {
 	for (Integer arabic : arabicToMapping.keySet()) {
-	    NumberMappingElement mapping = converter.findMappingForArabic(arabic);
+	    NumeralMappingElement mapping = converter.findMappingForArabic(arabic);
 	    assertThat(mapping.getRoman(), is(arabicToMapping.get(arabic)));
 	}
     }
 
     @Test
     public void isMappingForArabicNumber_1AndI_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(1, NumberMapping.mapping_I);
+	boolean result = converter.isMappingForArabicNumber(1, NumeralMapping.mapping_I);
 	assertThat(result, is(true));
     }
 
     @Test
     public void isMappingForArabicNumber_899AndD_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(899, NumberMapping.mapping_D);
+	boolean result = converter.isMappingForArabicNumber(899, NumeralMapping.mapping_D);
 	assertThat(result, is(true));
     }
 
     @Test
     public void isMappingForArabicNumber_899AndM_false() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(899, NumberMapping.mapping_M);
+	boolean result = converter.isMappingForArabicNumber(899, NumeralMapping.mapping_M);
 	assertThat(result, is(false));
     }
 
     @Test
     public void isMappingForArabicNumber_900AndM_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(900, NumberMapping.mapping_M);
+	boolean result = converter.isMappingForArabicNumber(900, NumeralMapping.mapping_M);
 	assertThat(result, is(true));
     }
 
     @Test
     public void isMappingForArabicNumber_1000AndM_true() throws Exception {
-	boolean result = converter.isMappingForArabicNumber(1000, NumberMapping.mapping_M);
+	boolean result = converter.isMappingForArabicNumber(1000, NumeralMapping.mapping_M);
 	assertThat(result, is(true));
     }
 

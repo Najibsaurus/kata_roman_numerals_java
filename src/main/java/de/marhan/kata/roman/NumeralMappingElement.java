@@ -1,6 +1,5 @@
 package de.marhan.kata.roman;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
@@ -8,11 +7,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author Markus Hanses
  * 
  */
-public class NumberMappingElement {
+public class NumeralMappingElement {
 
-    private NumberMappingElement before;
+    private NumeralMappingElement before;
 
-    private NumberMappingElement after;
+    private NumeralMappingElement after;
 
     private String roman;
 
@@ -20,8 +19,9 @@ public class NumberMappingElement {
 
     private Integer lowerBorder;
 
-    static NumberMappingElement newInstance(NumberMappingElement before, Integer number, String roman) {
-	NumberMappingElement mapping = new NumberMappingElement();
+    static NumeralMappingElement newInstance(NumeralMappingElement before, Integer number,
+	    String roman) {
+	NumeralMappingElement mapping = new NumeralMappingElement();
 	mapping.before = before;
 	mapping.roman = roman;
 	mapping.arabic = number;
@@ -29,8 +29,9 @@ public class NumberMappingElement {
 	return mapping;
     }
 
-    static NumberMappingElement newInstance(NumberMappingElement before, Integer number, String roman, NumberMappingElement after) {
-	NumberMappingElement mapping = new NumberMappingElement();
+    static NumeralMappingElement newInstance(NumeralMappingElement before, Integer number,
+	    String roman, NumeralMappingElement after) {
+	NumeralMappingElement mapping = new NumeralMappingElement();
 	mapping.before = before;
 	mapping.roman = roman;
 	mapping.arabic = number;
@@ -39,8 +40,8 @@ public class NumberMappingElement {
 	return mapping;
     }
 
-    static NumberMappingElement newInstance(Integer number, String roman) {
-	NumberMappingElement mapping = new NumberMappingElement();
+    static NumeralMappingElement newInstance(Integer number, String roman) {
+	NumeralMappingElement mapping = new NumeralMappingElement();
 	mapping.roman = roman;
 	mapping.arabic = number;
 	return mapping;
@@ -48,8 +49,7 @@ public class NumberMappingElement {
 
     private void computeLowerBorder() {
 	if (before != null) {
-	    Integer arabicOfSubstractionGroup = before.arabic;
-	    lowerBorder = arabic - arabicOfSubstractionGroup;
+	    lowerBorder = arabic - before.arabic;
 	}
     }
 
@@ -61,7 +61,7 @@ public class NumberMappingElement {
 	return arabic;
     }
 
-    public NumberMappingElement getBefore() {
+    public NumeralMappingElement getBefore() {
 	return before;
     }
 
@@ -69,7 +69,7 @@ public class NumberMappingElement {
 	return before != null;
     }
 
-    public NumberMappingElement getAfter() {
+    public NumeralMappingElement getAfter() {
 	return after;
     }
 
@@ -80,11 +80,6 @@ public class NumberMappingElement {
     @Override
     public String toString() {
 	return ToStringBuilder.reflectionToString(this);
-    }
-
-    @Override
-    public int hashCode() {
-	return HashCodeBuilder.reflectionHashCode(this);
     }
 
 }
