@@ -20,15 +20,61 @@ public class RomanNumberConverter {
 	Collections.sort(numberMappings, new InverseNaturalArabicSorter());
     }
 
-    public String convert(int number) {
+    /**
+     * Converts the arabic numerals to romans.
+     * 
+     * @param arabicNumber
+     *            The given arabicNumeral.
+     * @return The roman number for given arabic.
+     */
+    public String convert(Integer arabicNumber) {
 
 	StringBuilder builder = new StringBuilder();
+
+	NumberMappingElement mapping = findMappingForArabic(arabicNumber);
+	Integer prefixValue = getPrefixValue(arabicNumber, mapping);
+	String prefix = createRomanNumeralPrefixByMapping(prefixValue, mapping);
+	builder.append(prefix);
+
+	Integer differenceValue = calculateDifference(arabicNumber, prefixValue);
+	if (differenceValue > 0) {
+	    builder.append(convert(differenceValue));
+	}
 
 	return builder.toString();
     }
 
-    String findRomanForArabic(Integer arabicNumber) {
-	return findMappingForArabic(arabicNumber).getRoman();
+    private Integer calculateDifference(Integer arabicNumber, Integer prefixValue) {
+	return arabicNumber - prefixValue;
+    }
+
+    Integer getPrefixValue(Integer arabicNumber, NumberMappingElement mapping) {
+	if (arabicNumber >= mapping.getArabic()) {
+	    return mapping.getArabic();
+	}
+	if (arabicNumber >= mapping.getLowerBorder()) {
+	    return mapping.getLowerBorder();
+	}
+
+	String errorMessage = String.format("'%s' is not a arabic number of '%s'",//
+		arabicNumber, mapping.getRoman());
+	throw new IllegalArgumentException(errorMessage);
+    }
+
+    String createRomanNumeralPrefixByMapping(Integer prefixValue, NumberMappingElement mapping) {
+	if (mapping.getArabic() > prefixValue) {
+	    StringBuilder builder = new StringBuilder();
+	    builder.append(mapping.getBefore().getRoman());
+	    builder.append(mapping.getRoman());
+	    return builder.toString();
+	}
+	if (mapping.getArabic() == prefixValue) {
+	    return mapping.getRoman();
+	}
+
+	String errorMessage = String.format("'%s' is not in range of mapping for '%s'",//
+		prefixValue, mapping.getRoman());
+	throw new IllegalArgumentException(errorMessage);
     }
 
     NumberMappingElement findMappingForArabic(Integer arabicNumber) {

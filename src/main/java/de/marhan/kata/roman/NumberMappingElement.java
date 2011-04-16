@@ -12,6 +12,8 @@ public class NumberMappingElement {
 
     private NumberMappingElement before;
 
+    private NumberMappingElement after;
+
     private String roman;
 
     private Integer arabic;
@@ -23,6 +25,16 @@ public class NumberMappingElement {
 	mapping.before = before;
 	mapping.roman = roman;
 	mapping.arabic = number;
+	mapping.computeLowerBorder();
+	return mapping;
+    }
+
+    static NumberMappingElement newInstance(NumberMappingElement before, Integer number, String roman, NumberMappingElement after) {
+	NumberMappingElement mapping = new NumberMappingElement();
+	mapping.before = before;
+	mapping.roman = roman;
+	mapping.arabic = number;
+	mapping.after = after;
 	mapping.computeLowerBorder();
 	return mapping;
     }
@@ -55,6 +67,10 @@ public class NumberMappingElement {
 
     public boolean hasBefore() {
 	return before != null;
+    }
+
+    public NumberMappingElement getAfter() {
+	return after;
     }
 
     public Integer getLowerBorder() {

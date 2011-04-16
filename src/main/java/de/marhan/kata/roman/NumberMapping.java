@@ -1,6 +1,7 @@
 package de.marhan.kata.roman;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,6 +34,18 @@ public class NumberMapping {
 	romanNumbers.add(mapping_C);
 	romanNumbers.add(mapping_D);
 	romanNumbers.add(mapping_M);
+	return romanNumbers;
+    }
+
+    public static LinkedList<NumberMappingElement> createNumberMappingLinkedList() {
+	LinkedList<NumberMappingElement> romanNumbers = new LinkedList<NumberMappingElement>();
+	romanNumbers.addLast(mapping_I);
+	romanNumbers.addLast(mapping_V);
+	romanNumbers.addLast(mapping_X);
+	romanNumbers.addLast(mapping_L);
+	romanNumbers.addLast(mapping_C);
+	romanNumbers.addLast(mapping_D);
+	romanNumbers.addLast(mapping_M);
 	return romanNumbers;
     }
 
