@@ -10,4 +10,4 @@ Based upon [CodingDojo](http://www.codingdojo.org/cgi-bin/wiki.pl?KataRomanNumer
 
 	mvn cobertura:cobertura
 
-find the reports in folder "romannumberkatajava/target/site/cobertura/index.html"
+find the reports in folder "target/site/cobertura/index.html"
