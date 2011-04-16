@@ -2,13 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.marhan.kata.roman</groupId>
-	<artifactId>de.marhan.kata.roman</artifactId>
-	<name>romannumberkatajava</name>
+	<artifactId>kata-roman-numerals</artifactId>
+	<name>kata-roman-numerals</name>
 	<version>0.1</version>
-	<url>https://github.com/marhan/romannumberkatajava</url>
+	<url>https://github.com/marhan/kata_roman_numerals_java</url>
 	<scm>
 		<developerConnection>markus@markushanses.de</developerConnection>
-		<url>https://marhan@github.com/marhan/romannumberkatajava.git</url>
+		<url>https://marhan@github.com/marhan/kata_roman_numerals_java.git</url>
 	</scm>
 	<organization>
 		<name>Markus Hanses</name>
@@ -39,10 +39,13 @@
 			<version>2.6</version>
 		</dependency>
 	</dependencies>
-	<build>
+	<build>	
+	<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
@@ -51,6 +54,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.4</version>
 				<executions>
 					<execution>
 						<goals>
@@ -66,6 +70,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.4</version>
 			</plugin>
 		</plugins>
 	</reporting>
