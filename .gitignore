@@ -6,6 +6,6 @@
 .project
 .settings/*
 
-# target
-bin/*
-target/*
+# compile
+/bin
+/target
