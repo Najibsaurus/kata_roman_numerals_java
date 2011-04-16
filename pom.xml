@@ -4,7 +4,7 @@
 	<groupId>de.marhan.kata.roman</groupId>
 	<artifactId>de.marhan.kata.roman</artifactId>
 	<name>romannumberkatajava</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<url>https://github.com/marhan/romannumberkatajava</url>
 	<scm>
 		<developerConnection>markus@markushanses.de</developerConnection>

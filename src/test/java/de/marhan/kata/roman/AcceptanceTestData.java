@@ -6,7 +6,7 @@ package de.marhan.kata.roman;
  * @author Markus Hanses
  * 
  */
-public class TestData {
+public class AcceptanceTestData {
 
     /**
      * Returns the Roman number for the given Arabic.
