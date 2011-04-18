@@ -14,30 +14,28 @@ import de.marhan.kata.roman.mapping.NumeralMapping;
 import de.marhan.kata.roman.mapping.NumeralMappingElement;
 
 /**
- * 
  * @author Markus Hanses
- * 
  */
 public class NumberMappingSorterTest {
 
-    List<NumeralMappingElement> mappings;
+	List<NumeralMappingElement> mappings;
 
-    @Before
-    public void setUp() {
-	mappings = NumeralMapping.createNumeralMappingList();
-    }
-
-    @Test
-    public void sort_arabicInInverseNaturalOrder() throws Exception {
-	Collections.sort(mappings, new InverseNaturalArabicSorter());
-	assertArabicSortingIsInverseNatural(mappings);
-    }
-
-    private void assertArabicSortingIsInverseNatural(List<NumeralMappingElement> mappings) {
-	Integer before = 1001;
-	for (NumeralMappingElement mapping : mappings) {
-	    assertThat(mapping.getArabic(), is(lessThan(before)));
-	    before = mapping.getArabic();
+	@Before
+	public void setUp() {
+		mappings = NumeralMapping.createNumeralMappingList();
 	}
-    }
+
+	@Test
+	public void sort_arabicInInverseNaturalOrder() throws Exception {
+		Collections.sort(mappings, new InverseNaturalArabicSorter());
+		assertArabicSortingIsInverseNatural(mappings);
+	}
+
+	private void assertArabicSortingIsInverseNatural(List<NumeralMappingElement> mappings) {
+		Integer before = 1001;
+		for (NumeralMappingElement mapping : mappings) {
+			assertThat(mapping.getArabic(), is(lessThan(before)));
+			before = mapping.getArabic();
+		}
+	}
 }
