@@ -22,7 +22,7 @@ public class RomanNumeralConverter {
 	}
 
 	/**
-	 * Converts the arabic numerals to romans.
+	 * Converts the arabic numerals to roman.
 	 * 
 	 * @param arabicNumeral The given arabicNumeral.
 	 * @return The roman number for given arabic.
